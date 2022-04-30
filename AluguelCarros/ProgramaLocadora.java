@@ -1,11 +1,12 @@
 package AluguelCarros;
 import javax.swing.JOptionPane;
-public class Telas {
-	//Locadora locadora = new Locadora("Locadora GRUPO 10");
-    public Telas(){
+public class ProgramaLocadora {
+	//Todas as funcoes de escolha estao nessa classe
+	
+	Locadora locadora = new Locadora("Locadora GRUPO 10");
+    public ProgramaLocadora(){
             
     }
-    
     public void erroShow() {
     	JOptionPane.showMessageDialog(null, "Inválid(o)!\nTente Novamente");
     	return;
@@ -16,8 +17,9 @@ public class Telas {
     	System.exit(0);
     }
     
-    public void telaShow(){
-        String n = JOptionPane.showInputDialog(null, "******************** Menu Principal *********************\nA) Gerenciar Locatario          B) Gerenciar Frota\nC) Gerenciar Reservas         D) Sair do Programa");
+    public void start(){
+        String n = JOptionPane.showInputDialog(null, "******************** Menu Principal *********************\nA) Gerenciar Locatario          B) Gerenciar Frota\n"
+        											+"	C) Gerenciar Reservas         D) Sair do Programa", this.locadora.getNomeLocadora());
         switch(n) {
         	case "A", "a":
         		t1opAShow();
@@ -38,7 +40,9 @@ public class Telas {
     }
     
     public void t1opAShow() {
-    	String n = JOptionPane.showInputDialog(null, "****************** Menu Gerência de Locatários *************\nA) Cadastrar Pessoa Física\nB) Cadastrar Pessoa Jurídica\nC) Buscar Locatário\nD) Pesquisar Locatário\nE) Excluir locatário\n");
+    	String n = JOptionPane.showInputDialog(null, "****************** Menu Gerência de Locatários *************"
+    			+ "									\nA) Cadastrar Pessoa Física\nB) Cadastrar Pessoa Jurídica\nC) Buscar Locatário"
+    			+ "									\nD) Pesquisar Locatário\nE) Excluir locatário\n" , this.locadora.getNomeLocadora());
     	switch(n) {
     		case "A", "a":
     			registraDadosPF();
@@ -47,7 +51,8 @@ public class Telas {
     			registraDadosPJ();
     			break;
     		case "C", "c":
-    		
+    			String idnomeProcurado = JOptionPane.showInputDialog(null, "Digite o Nome, CPF ou CNPJ para procurar:", locadora.getNomeLocadora());
+    			locadora.buscar(idnomeProcurado, "Pessoa Fisica");
     		break;
     		case "D", "d":
     			
@@ -62,7 +67,7 @@ public class Telas {
     	
     }
     public void registraDadosPF() {
-    	String tipo = "Pessoa Fisica";
+    	String tipo = "Pessoa Fisica"; // Apenas pra printar no JOptionPane
 		String nome = JOptionPane.showInputDialog(null, "Digite o Nome:",  tipo, JOptionPane.INFORMATION_MESSAGE);
 		String email = JOptionPane.showInputDialog(null, "Digite o Email: ",  tipo, JOptionPane.INFORMATION_MESSAGE);
 		String cpfTeste = (JOptionPane.showInputDialog(null, "Digite o CPF:", "Pessoa Fisica",  JOptionPane.INFORMATION_MESSAGE));
@@ -79,20 +84,24 @@ public class Telas {
 		String idadeString = JOptionPane.showInputDialog(null, "Digite a idade", tipo, JOptionPane.INFORMATION_MESSAGE);
 		try {
 			int idadeTesteInt = Integer.parseInt(idadeString);
+			if(idadeTesteInt < 18) {
+				JOptionPane.showMessageDialog(null, "Idade Não Permitida!");
+				return;
+			}
 		}catch(NumberFormatException e) {
 			erroShow();
 			return;
 		}
 			idade = Integer.parseInt(idadeString);
-		String endereco = JOptionPane.showInputDialog(null, "Digite o Endereco", tipo, JOptionPane.INFORMATION_MESSAGE);
-		String telefone = JOptionPane.showInputDialog(null, "Digite o Telefone", tipo, JOptionPane.INFORMATION_MESSAGE);
+		String endereco = JOptionPane.showInputDialog(null, "Digite o Endereco:", tipo, JOptionPane.INFORMATION_MESSAGE);
+		String telefone = JOptionPane.showInputDialog(null, "Digite o Telefone:", tipo, JOptionPane.INFORMATION_MESSAGE);
 		String estadoCivil = JOptionPane.showInputDialog(null, "Digite o Estado Civil:", tipo, JOptionPane.INFORMATION_MESSAGE);
-		//locadora.cadastrarPessoaFisica(nome, cpf, email, idade, endereco, telefone, estadoCivil);		
+		locadora.cadastrarPF(nome, cpf, email, idade, endereco, telefone, estadoCivil);		
 
     }
-   /* public List<PessoaFisica> registraDadosFuncionariosPJ(int qtdFuncionarios) {
-    * 	List<String> funcionarios = new List<String>();
-    * 	int funcionariosRegistrados = 0;
+    public void registraDadosFuncionariosPJ(int qtdFuncionarios) { // List<PessoaFisica>
+     	/*List<String> funcionarios = new List<String>();
+     	int funcionariosRegistrados = 0;
      	do{
      		String tipo = "Pessoa Fisica";
 			String nome = JOptionPane.showInputDialog(null, "Digite o Nome:",  tipo, JOptionPane.INFORMATION_MESSAGE);
@@ -122,8 +131,9 @@ public class Telas {
 			funcionarios.add(new PessoaFisica(nome, cpf, email, idade, endereco, telefone, estadoCivil));	
 			funcionariosRegistrados++;
 		while(qtdFuncionarios > funcionariosRegistrados);
-	return funcionarios;
-    }*/
+     	 */
+	//return funcionarios;
+    }
     public void registraDadosPJ() {
     	String tipo = "Pessoa Fisica";
 		String nome = JOptionPane.showInputDialog(null, "Digite a Razão Social:",  tipo, JOptionPane.INFORMATION_MESSAGE);
@@ -135,7 +145,7 @@ public class Telas {
 		try {
 			int n = Integer.parseInt(testeQtdFunc);
 			if(n >= 1) {
-				// List<PessoaFisica> funcionarios = registraDadosPF(testeQtdFunc);
+				// List<PessoaFisica> funcionarios = registraDadosFuncionariosPJ(testeQtdFunc);
 				// locadora.cadastrarPessoaJuridica(nome, cnpj, email, endereco, telefone, funcionarios);	
 			}else if (n == 0) {
 				return;

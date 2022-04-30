@@ -1,25 +1,22 @@
-/*package AluguelCarros;
+package AluguelCarros;
 import javax.swing.JOptionPane;
+import java.util.List;
 import java.util.ArrayList;
 
-
 public class Locadora {
-	protected int MAX_LOC;
-	private String nomeLocadora;
+	//Classe vai armazenar atributos de uma locadora hipotetica e conter 2 Lists para armazenar objetos do tipo Pessoa Fisicas ou Pessoas Juridicas
+	//Atributos
+	public int MAX_LOC;
+	public String nomeLocadora;
 	public int qtdLocatarios;
-	public boolean confereLocatario;
-	private Arraylist<PessoaFisica> pessoaFisica = new Arraylist<PessoaFisica>();
-	private Arraylist<PessoaJuridica> pessoaJuridica = new Arraylist<PessoaJuridica>();
-	private Frota frota;
-	
-	
+	ArrayList<PessoaFisica> pessoasFisica = new ArrayList<PessoaFisica>();
+	//private Arraylist<PessoaJuridica> pessoaJuridica = new Arraylist<PessoaJuridica>();
+	//private Frota frota;
+	//Metodos
 	
 	public Locadora(String nomeLocadora) {
 		this.nomeLocadora = nomeLocadora;
-	}
-	
-	public Boolean getConfereLocatario() {
-		return this.confereLocatario;
+		this.qtdLocatarios = 0;
 	}
 	
 	public String getNomeLocadora() {
@@ -30,74 +27,71 @@ public class Locadora {
 		return this.qtdLocatarios;
 	}
 	
-	public void buscarPF(String idnomePF) {
-		for(PessoaFisica p : pessoaFisica){
-		    if(idnomePF.equals(p.Nome) || idnomePF.equals(p.CPF)){
-				JOptionPane.showMessageDialog(null, "Pessoa encontrada no sistema!");
-				p.info();
-				return;
-
-		    	
-		    }
+	public void buscar(String idnomePF, String tipoPessoa) {
+		if(tipoPessoa.equals("Pessoa Fisica")) {
+			for(PessoaFisica pf : pessoasFisica){
+				if(idnomePF.equals(pf.getNomeLocatario()) || idnomePF.equals(pf.getCpf())){
+					JOptionPane.showMessageDialog(null, "Pessoa encontrada no sistema!");
+					pf.info();
+					return;	
+				}
+			}
+		}/*else {
+			for(PessoaJuridica pj : pessoasJuridica){
+				if(idnomePF.equals(pf.getNomeLocatario()) || idnomePF.equals(pf.getCpf())){
+					JOptionPane.showMessageDialog(null, "Pessoa encontrada no sistema!");
+					pf.info();
+					return;	
+				}
+			}
 		}
-		      JOptionPane.showMessageDialog(null, "Esta pessoa não está cadastrada no sistema!");
-			
-	
-	}
-	
-	public void buscarPJ(String idnomePJ) {
-		for(PessoaJuridica j : pessoaJuridica){
-		    if(idnomePJ.equals(j.Nome) || idnomePJ.equals(j.CNPJ)){
-				JOptionPane.showMessageDialog(null, "Empresa encontrada no sistema!");
-				j.info();
-				return;
-
-		    	
-		    }
-		}
-		JOptionPane.showMessageDialog(null, "Esta empresa não está cadastrada no sistema!");
+		 */
+		JOptionPane.showMessageDialog(null, "Inválido ou Não Cadastrado!");			
 	}
 	
 	public void excluirPF(String idnomePF) {
-		for(PessoaFisica p : pessoaFisica) {
+	/*	for(PessoaFisica p : pessoaFisica) {
 			if(idnomePF.equals(p.Nome) || idnomePF.equals(p.CPF)) {
 				pessoaFisica.remove(p);
 				JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso!");
 				return;
 			}
 		}
-		
 		JOptionPane.showMessageDialog(null, "Não foi possível excluir esta pessoa!");
+			*/
 	}
 	
 	public void excluirPJ(String idnomePJ) {
-		for(PessoaJuridica j : pessoaJuridica) {
+		/*for(PessoaJuridica j : pessoaJuridica) {
 			if(idnomePJ.equals(j.Nome) || idnomePJ.equals(j.CNPJ)) {
 				pessoaJuridica.remove(j);
 				JOptionPane.showMessageDialog(null, "Empresa excluída com sucesso!");
 				return;
 			}
 		}
-		
 		JOptionPane.showMessageDialog(null, "Não foi possível excluir esta empresa!");
+		*/		
 	}
 	
 	public void cadastrarPF(String Nome, String CPF, String Email, int Idade, String Endereco, String Telefone, String Estado_civil) {
-		PessoaFisica p = new PessoaFisica;
+		PessoaFisica p = new PessoaFisica();
 		
-		p.setNome(Nome);
-		p.setCPF(CPF);
+		p.setNomeLocatario(Nome);
+		p.setID(CPF);
+		p.setCpf(CPF);
 		p.setEmail(Email);
 		p.setIdade(Idade);
 		p.setEndereco(Endereco);
 		p.setTelefone(Telefone);
-		p.setEstado_civil(Estado_civil);
+		p.setEstadoCivil(Estado_civil);
 		
-		pessoaFisica.add(p);
+		this.pessoasFisica.add(p);
+		p.info();
+		
 	}
 	
 	public void cadastrarPJ(String Nome, String CNPJ, String Email, String Endereco, String Telefone) {
-		PessoaJuridica j = new PessoaJuridica;
+		/*PessoaJuridica j = new PessoaJuridica;
 		
 		j.setNome(Nome);
 		j.setCNPJ(CNPJ);
@@ -106,6 +100,7 @@ public class Locadora {
 		j.setTelefone(Telefone);
 		
 		pessoaJuridica.add(j);
+		*/
 	}
 	
-}*/
+}

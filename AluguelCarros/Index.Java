@@ -2,10 +2,11 @@ package AluguelCarros;
 
 public class Index{
     public static void main(String[] args){
+    	//Index apenas inicia o Programa e roda em loop
     	Boolean app = true;
-        Telas tela = new Telas();
+        ProgramaLocadora iniciar = new ProgramaLocadora();
         do{
-            tela.telaShow();             
+            iniciar.start();             
             }while(app); 
     }    	
 }   
