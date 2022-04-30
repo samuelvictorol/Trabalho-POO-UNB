@@ -8,8 +8,14 @@ public class PessoaFisica extends Locatarios {
 	protected String CPF;
 	protected int idade;
 		//Métodos
-		public PessoaFisica(String nomeLocatario, String endereco, String email, String Telefone, String estadoCivil) {
+		public PessoaFisica(String nomeLocatario, String cpf, String email, String endereco, String telefone, int idade ,String estadoCivil) {
 			super();
+			this.nomeLocatario = nomeLocatario;
+			this.CPF = cpf;
+			this.email = email;
+			this.endereco = endereco;
+			this.telefone = telefone;
+			this.idade = idade;
 			this.estadoCivil = estadoCivil;
 		}
 		
