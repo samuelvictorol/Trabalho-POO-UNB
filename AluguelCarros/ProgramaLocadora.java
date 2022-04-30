@@ -123,7 +123,8 @@ public class ProgramaLocadora {
 			}catch(NumberFormatException e) {
 				erroShow();
 				return null;
-			}
+			} 
+			
 			idade = Integer.parseInt(idadeString);
 			String endereco = JOptionPane.showInputDialog(null, "Digite o Endereco", tipo + i, JOptionPane.INFORMATION_MESSAGE);
 			String telefone = JOptionPane.showInputDialog(null, "Digite o Telefone", tipo + i, JOptionPane.INFORMATION_MESSAGE);
