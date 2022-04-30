@@ -50,6 +50,7 @@ public class Locadora {
 					return;	
 				}
 			}
+			
 			for(PessoaJuridica pj : pessoasJuridica){
 				if(idnomePF.equals(pj.getNomeLocatario()) || idnomePF.equals(pj.getCnpj())){
 					JOptionPane.showMessageDialog(null, "Pessoa Juridica encontrada no sistema!");
