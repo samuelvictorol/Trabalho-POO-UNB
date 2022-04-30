@@ -11,31 +11,6 @@ abstract class Locatarios {
 		
 	}
 	//Metodos
-	public void cadastrarPF() {
-		
-	}
-
-	public void cadastrarPJ() {
-	/*	try {
-			setNomeLocatario(JOptionPane.showInputDialog("Insira os dados a seguir:\nRazao Social: "));
-			setID(JOptionPane.showInputDialog("CNPJ: "));
-			setEndereco(JOptionPane.showInputDialog("Endereco: "));
-			setEmail(JOptionPane.showInputDialog("E-mail"));
-			setTelefone(JOptionPane.showInputDialog("Telefone: "));		
-			String strQtdFuncionarios = JOptionPane.showInputDialog(null, "Quantos Funcionarios serao cadastrados ?",
-													  "1 - 5 Funcionarios");
-			int qtdFuncionarios = Integer.parseInt(strQtdFuncionarios);
-			if(qtdFuncionarios >= 1 && qtdFuncionarios <= 5) {
-				this.pj = new PessoaJuridica(this.nomeLocatario, this.id, "Pessoa Juridica", this.endereco, this.email, this.telefone, qtdFuncionarios);
-				this.pj.cadastrarFuncionario();				
-			}else {
-				JOptionPane.showMessageDialog(null, "Numero Invalido\n->Digite um valor entre 1 - 5");
-			}
-		}catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Valor digitado invalido");
-		}*/
-	}
-
 	public void setNomeLocatario(String nomeLocatario) {
 		this.nomeLocatario = nomeLocatario;
 	}
@@ -77,7 +52,7 @@ abstract class Locatarios {
 	}
 
 	public String infoString() {
-		return ("Nome: " + this.nomeLocatario  + "\nEndereco:  " + this.endereco + "\nEmail: " + this.email + "Telefone: " + this.telefone);
+		return ("Nome/Razão Social: " + this.nomeLocatario  + "\nEndereco:  " + this.endereco + "\nEmail: " + this.email + "\nTelefone: " + this.telefone);
 	}
 	
 }

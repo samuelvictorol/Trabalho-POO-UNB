@@ -1,5 +1,7 @@
 package AluguelCarros;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
 public class ProgramaLocadora {
 	//Todas as funcoes de escolha estao nessa classe
 	
@@ -42,7 +44,7 @@ public class ProgramaLocadora {
     public void t1opAShow() {
     	String n = JOptionPane.showInputDialog(null, "****************** Menu Gerência de Locatários *************"
     			+ "									\nA) Cadastrar Pessoa Física\nB) Cadastrar Pessoa Jurídica\nC) Buscar Locatário"
-    			+ "									\nD) Pesquisar Locatário\nE) Excluir locatário\n" , this.locadora.getNomeLocadora());
+    			+ "									\nD) Excluir locatário\n" , this.locadora.getNomeLocadora());
     	switch(n) {
     		case "A", "a":
     			registraDadosPF();
@@ -51,15 +53,13 @@ public class ProgramaLocadora {
     			registraDadosPJ();
     			break;
     		case "C", "c":
-    			String idnomeProcurado = JOptionPane.showInputDialog(null, "Digite o Nome, CPF ou CNPJ para procurar:", locadora.getNomeLocadora());
-    			locadora.buscar(idnomeProcurado, "Pessoa Fisica");
+    				String idnomeProcurado = JOptionPane.showInputDialog(null, "Digite o Nome, CPF ou CNPJ para procurar:", locadora.getNomeLocadora());
+    				locadora.buscar(idnomeProcurado);
     		break;
     		case "D", "d":
-    			
-    			break;
-    		case "E", "e":
-    			
-    			break;
+    			String idnomeExcluir = JOptionPane.showInputDialog(null, "Digite o Nome, CPF ou CNPJ para remover:", locadora.getNomeLocadora());
+    			locadora.excluir(idnomeExcluir);    				
+    			break;	
     		default:
     			erroShow();
     			return;
@@ -99,43 +99,44 @@ public class ProgramaLocadora {
 		locadora.cadastrarPF(nome, cpf, email, idade, endereco, telefone, estadoCivil);		
 
     }
-    public void registraDadosFuncionariosPJ(int qtdFuncionarios) { // List<PessoaFisica>
-     	/*List<String> funcionarios = new List<String>();
-     	int funcionariosRegistrados = 0;
+    public ArrayList<PessoaFisica> registraDadosFuncionariosPJ(int qtdFuncionarios) { 
+     	ArrayList<PessoaFisica> funcionarios = new ArrayList<PessoaFisica>();
+     	int i = 1;
      	do{
-     		String tipo = "Pessoa Fisica";
-			String nome = JOptionPane.showInputDialog(null, "Digite o Nome:",  tipo, JOptionPane.INFORMATION_MESSAGE);
-			String email = JOptionPane.showInputDialog(null, "Digite o Email: ",  tipo, JOptionPane.INFORMATION_MESSAGE);
-			String cpfTeste = (JOptionPane.showInputDialog(null, "Digite o CPF:", "Pessoa Fisica",  JOptionPane.INFORMATION_MESSAGE));
+     		String tipo = "Funcionario ";
+			String nome = JOptionPane.showInputDialog(null, "Digite o Nome:",  tipo + i, JOptionPane.INFORMATION_MESSAGE);
+			String email = JOptionPane.showInputDialog(null, "Digite o Email: ",  tipo + i, JOptionPane.INFORMATION_MESSAGE);
+			String cpfTeste = (JOptionPane.showInputDialog(null, "Digite o CPF:", tipo + i,  JOptionPane.INFORMATION_MESSAGE));
 			Boolean checkCpf = verificaCpf(cpfTeste);			
 			String cpf = "";
-			int idade = 0;
+			int idade;
 			if(checkCpf) {
 				cpf = cpfTeste;	
 			}
 			else {
-			erroShow();
-				return;
+				erroShow();
+				return null;
 			}
-			String idadeString = JOptionPane.showInputDialog(null, "Digite a idade", tipo, JOptionPane.INFORMATION_MESSAGE);
+			String idadeString = JOptionPane.showInputDialog(null, "Digite a idade", tipo + i, JOptionPane.INFORMATION_MESSAGE);
 			try {
-				int idadeTesteInt = Integer.parseInt(idadeString);
+				int idadeTesteInt = Integer.parseInt(idadeString); // garante que vai ser digitado um numero
 			}catch(NumberFormatException e) {
 				erroShow();
-				return;
-			}
+				return null;
+			} 
+			
 			idade = Integer.parseInt(idadeString);
-			String endereco = JOptionPane.showInputDialog(null, "Digite o Endereco", tipo, JOptionPane.INFORMATION_MESSAGE);
-			String telefone = JOptionPane.showInputDialog(null, "Digite o Telefone", tipo, JOptionPane.INFORMATION_MESSAGE);
-			String estadoCivil = JOptionPane.showInputDialog(null, "Digite o Estado Civil:", tipo, JOptionPane.INFORMATION_MESSAGE);
-			funcionarios.add(new PessoaFisica(nome, cpf, email, idade, endereco, telefone, estadoCivil));	
-			funcionariosRegistrados++;
-		while(qtdFuncionarios > funcionariosRegistrados);
-     	 */
-	//return funcionarios;
+			String endereco = JOptionPane.showInputDialog(null, "Digite o Endereco", tipo + i, JOptionPane.INFORMATION_MESSAGE);
+			String telefone = JOptionPane.showInputDialog(null, "Digite o Telefone", tipo + i, JOptionPane.INFORMATION_MESSAGE);
+			String estadoCivil = JOptionPane.showInputDialog(null, "Digite o Estado Civil:", tipo + i, JOptionPane.INFORMATION_MESSAGE);
+			funcionarios.add(new PessoaFisica(nome, cpf, email, endereco, telefone, idade, estadoCivil));	
+
+			i++;
+     	}while(i <= qtdFuncionarios);
+		return funcionarios;
     }
     public void registraDadosPJ() {
-    	String tipo = "Pessoa Fisica";
+    	String tipo = "Pessoa Juridica";
 		String nome = JOptionPane.showInputDialog(null, "Digite a Razão Social:",  tipo, JOptionPane.INFORMATION_MESSAGE);
 		String email = JOptionPane.showInputDialog(null, "Digite o Email: ",  tipo, JOptionPane.INFORMATION_MESSAGE);
 		String cnpj= (JOptionPane.showInputDialog(null, "Digite o CNPJ:", "Pessoa Fisica",  JOptionPane.INFORMATION_MESSAGE));
@@ -145,10 +146,10 @@ public class ProgramaLocadora {
 		try {
 			int n = Integer.parseInt(testeQtdFunc);
 			if(n >= 1) {
-				// List<PessoaFisica> funcionarios = registraDadosFuncionariosPJ(testeQtdFunc);
-				// locadora.cadastrarPessoaJuridica(nome, cnpj, email, endereco, telefone, funcionarios);	
+				 ArrayList<PessoaFisica> funcionarios = registraDadosFuncionariosPJ(n);
+				 locadora.cadastrarPJ(nome, cnpj, email, endereco, telefone, funcionarios);	
 			}else if (n == 0) {
-				return;
+				sairShow();
 			}
 			else {
 				erroShow();
@@ -156,6 +157,8 @@ public class ProgramaLocadora {
 			}
 		}catch(NumberFormatException e) {
 			erroShow();
+			return;
+		}catch(NullPointerException e) {
 			return;
 		}
 		
