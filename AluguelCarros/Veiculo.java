@@ -94,7 +94,6 @@ abstract class Veiculo {
 		this.valorMensal = valorMensal;
 		this.valorTotal =  valorSeguroProprio + valorSeguroTerceiros + valorImpostos; 
 	}
-	
 	public void setValorTotal(double qtdDias) {
 		if(qtdDias >= 30 && qtdDias < 59) {
 			this.valorTotal += (this.valorMensal * 1);
