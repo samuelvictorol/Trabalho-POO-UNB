@@ -5,7 +5,7 @@ import java.util.List;
 public class ProgramaLocadora {
 	//Todas as funcoes de escolha estao nessa classe
 	
-	Locadora locadora = new Locadora("Locadora GRUPO 10");
+	Locadora locadora = new Locadora("Locadora GRUPO 10 UNB");
     public ProgramaLocadora(){
             
     }
@@ -24,14 +24,14 @@ public class ProgramaLocadora {
         											+"	C) Gerenciar Reservas         D) Sair do Programa", this.locadora.getNomeLocadora());
         switch(n) {
         	case "A", "a":
-        		t1opAShow();
+        		optAShow();
         		break;
         	case "B", "b":
-        		
+        		optBShow();
         		break;
         	case "C", "c":
-        		
-        		break;
+        		optCShow(); 
+        		 break;
         	case "D", "d":
         		sairShow();
         		break;
@@ -40,8 +40,153 @@ public class ProgramaLocadora {
         		break;
         }       
     }
+  
+    public void optBShow() {
+    	String menu = "Frota";
+    	String b = JOptionPane.showInputDialog(null, "******************** Gerenciar Frota *********************"
+    												+ "\nA) Cadastrar Veiculo      B) Buscar Veiculo"
+				 									+ "\nC) Retirar Veiculo           D) Entregar Carro"
+    												+ "\nE) Alterar Cor                 	 F) Sair", menu);
+    	switch(b) {
+    	case "A", "a":
+    		registraDadosFrota();
+    		break;
+    	case "B", "b": 
+    		String pesquisa = JOptionPane.showInputDialog(null, "Digite o Modelo, Placa ou Renavam do veiculo", menu);
+			this.locadora.frota.pesquisarVeiculo(pesquisa);
+    		break;
+    	case "C", "c":
+			
+    		break;
+    	case "D", "d":
+			
+    		break;
+    	case "E", "e":
+				
+    		break;
+    	case "F", "f":
+    		return;
+    	default:
+    		break;
+    	}
+		
+    }
+
+
+    public void registraDadosFrota() {
+    	String menu = "Frota";
+    	String categoria = JOptionPane.showInputDialog(null, "1) Veiculo Passeio 2) Motocicleta 3) Veiculo Utilitario"
+    													   + "\nDigite a Categoria: ", menu);
+    	switch(categoria) {
+    	case "1":
+    		categoria = "Veiculo Passeio";
+    		registraDadosVeiculoPasseio(categoria);
+    		break;
+    	case "2":
+    		
+    		break;
+    	case "3":
+    		
+    		break;
+    	default:
+    		erroShow();
+    		return;
+    	}
+    }
     
-    public void t1opAShow() {
+    public void registraDadosVeiculoPasseio(String categoria) {
+    	String menu = "Frota";
+    	Boolean protecaoPropria = false;
+    	Boolean arCondicionado = false;
+    	Boolean direcaoHidraulica = false;
+    	Boolean cambioAutomatico = false;
+    	String renavam = JOptionPane.showInputDialog(null, "Digite o RENAVAM:", menu);
+    	try {
+    		Integer.parseInt(renavam);
+    	}catch(Exception ex) {
+    		erroShow();
+    		return;
+    	}
+    	String anoModelo = JOptionPane.showInputDialog(null, "Digite o Modelo/Ano:", menu);
+    	String placa =  JOptionPane.showInputDialog(null, "Digite a Placa:", menu);
+    	String cor = JOptionPane.showInputDialog(null, "Digite a cor:", menu);
+    	String valorSeguroProprio = JOptionPane.showInputDialog(null, "Digite o Valor do Seguro Proprio", menu);
+    	try {
+    		Double.valueOf(valorSeguroProprio).doubleValue();
+    	}catch(Exception ex) {
+    		erroShow();
+    		return;
+    	}
+    	String valorSeguroTerceiros = JOptionPane.showInputDialog(null, "Digite o Valor do Seguro de Terceiros", menu);
+    	try {
+    		Double.valueOf(valorSeguroTerceiros).doubleValue();
+    	}catch(Exception ex) {
+    		erroShow();
+    		return;
+    	}
+    	String valorImpostos = JOptionPane.showInputDialog(null, "Digite o Valor dos Impostos", menu);
+    	try {
+    		Double.valueOf(valorImpostos).doubleValue();
+    	}catch(Exception ex) {
+    		erroShow();
+    		return;
+    	}
+    	String valorDiaria = JOptionPane.showInputDialog(null, "Digite o Valor da Diaria", menu);
+    	try {
+    		Double.valueOf(valorDiaria).doubleValue();
+    	}catch(Exception ex) {
+    		erroShow();
+    		return;
+    	}
+    	String valorMensal = JOptionPane.showInputDialog(null, "Digite o Valor Mensal", menu);
+    	try {
+    		Double.valueOf(valorMensal).doubleValue();
+    	}catch(Exception ex) {
+    		erroShow();
+    		return;
+    	}
+    	int intProtecaoPropria = JOptionPane.showConfirmDialog(null, "Possui Protecao Propria?");
+    	if(intProtecaoPropria == 2) {
+    		return;
+    	}else if(intProtecaoPropria == 0) {
+    		protecaoPropria = true;
+    	}
+    	int intArCondicionado = JOptionPane.showConfirmDialog(null, "Possui Ar Condicionado ?");
+    	if(intArCondicionado == 2) {
+    		return;
+    	}else if(intArCondicionado == 0) {
+    		arCondicionado = true;
+    	}
+    	int intDirecaoHidraulica = JOptionPane.showConfirmDialog(null, "Possui Direcao Hidraulica ?");
+    	if(intDirecaoHidraulica == 2) {
+    		return;
+    	}else if(intDirecaoHidraulica== 0) {
+    		direcaoHidraulica = true;
+    	}
+    	int intCambioAutomatico = JOptionPane.showConfirmDialog(null, "Possui Cambio Automatico ?");
+    	if(intCambioAutomatico == 2) {
+    		return;
+    	}else if(intCambioAutomatico == 0) {
+    		cambioAutomatico = true;
+    	}
+    	
+    	locadora.cadastrarVeiculo(categoria, protecaoPropria, arCondicionado, direcaoHidraulica, cambioAutomatico, renavam, anoModelo, placa
+    							, cor, Double.valueOf(valorSeguroProprio).doubleValue(), Double.valueOf(valorSeguroTerceiros).doubleValue(),
+    							Double.valueOf(valorImpostos).doubleValue(), Double.valueOf(valorDiaria).doubleValue(), Double.valueOf(valorMensal).doubleValue());    	
+    }
+    
+    public void optCShow() {
+    	String menu = "Reservas";
+		String c = JOptionPane.showInputDialog(null, "******************** Gerenciar Reservas *********************\nA) Cadastrar Reserva        B) Verificar Reserva\n"
+													 +" C) Excluir Reserva            D) Sair", menu);
+		switch(c) {
+			case "A", "a":
+				locadora.cadastrarReserva();
+				break;
+		} 
+    }
+    
+    public void optAShow() {
     	String n = JOptionPane.showInputDialog(null, "****************** Menu Gerência de Locatários *************"
     			+ "									\nA) Cadastrar Pessoa Física\nB) Cadastrar Pessoa Jurídica\nC) Buscar Locatário"
     			+ "									\nD) Excluir locatário\n" , this.locadora.getNomeLocadora());
@@ -66,6 +211,8 @@ public class ProgramaLocadora {
     	}
     	
     }
+  
+    //Registro de Dados:
     public void registraDadosPF() {
     	String tipo = "Pessoa Fisica"; // Apenas pra printar no JOptionPane
 		String nome = JOptionPane.showInputDialog(null, "Digite o Nome:",  tipo, JOptionPane.INFORMATION_MESSAGE);
@@ -163,7 +310,13 @@ public class ProgramaLocadora {
 		}
 		
     }
-    
+    public void registraDadosReserva() {
+    	
+    	
+    	
+    	
+    	
+    }
     public Boolean verificaCpf(String CPF) {
     	if (CPF.length() != 11) {			
 			return false;
@@ -207,5 +360,24 @@ public class ProgramaLocadora {
 			return false;
 		}
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

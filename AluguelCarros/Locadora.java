@@ -10,12 +10,14 @@ public class Locadora {
 	public int qtdLocatarios;
 	ArrayList<PessoaFisica> pessoasFisica = new ArrayList<PessoaFisica>();
 	ArrayList<PessoaJuridica> pessoasJuridica = new ArrayList<PessoaJuridica>();
-	//private Frota frota;
+	//ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	Frota frota = new Frota();
 	//Metodos
 	
 	public Locadora(String nomeLocadora) {
 		this.nomeLocadora = nomeLocadora;
 		this.qtdLocatarios = 0;
+		frota = new Frota();
 	}
 	
 	public String getNomeLocadora() {
@@ -81,6 +83,7 @@ public class Locadora {
 		this.qtdLocatarios++; 
 	}
 	
+	
 	public void cadastrarPJ(String Nome, String CNPJ, String Email, String Endereco, String Telefone, ArrayList<PessoaFisica> funcionarios) {
 		PessoaJuridica pj = new PessoaJuridica();
 		
@@ -96,5 +99,49 @@ public class Locadora {
 		this.pessoasJuridica.add(pj);
 		this.qtdLocatarios++; 
 	}
+
+	public void cadastrarVeiculo(String categoria, Boolean protecaoPropria, Boolean arCondicionado, Boolean direcaoHidraulica
+								, Boolean cambioAutomatico, String renavam, String anoModelo,String placa,String cor
+								, Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos
+								, Double valorDiaria, Double valorMensal) {
+								
+		if(categoria.equals("Veiculo Passeio")) {
+			this.frota.cadastrarCarro(categoria, protecaoPropria, arCondicionado, direcaoHidraulica, cambioAutomatico, renavam, anoModelo, placa
+					  				, cor, valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+		}
+	}
+		
+	public void cadastrarReserva() {
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
