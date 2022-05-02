@@ -7,7 +7,6 @@ public class VeiculoPasseio extends Veiculo {
 	
 	public VeiculoPasseio() {
 		super();
-		this.setDisponivel(true);
 	}
 	
 	public boolean getArCondicionado() {
@@ -37,6 +36,9 @@ public class VeiculoPasseio extends Veiculo {
 
 	public void setCambioAutomatico(Boolean cambioAutomatico) {
 		this.cambioAutomatico = cambioAutomatico;
+	}
+	public VeiculoPasseio retornaVP() {
+		return this;
 	}
 	
 	public String info() {

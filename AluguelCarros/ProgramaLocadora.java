@@ -45,8 +45,8 @@ public class ProgramaLocadora {
     	String menu = "Frota";
     	String b = JOptionPane.showInputDialog(null, "******************** Gerenciar Frota *********************"
     												+ "\nA) Cadastrar Veiculo      B) Buscar Veiculo"
-				 									+ "\nC) Retirar Veiculo           D) Entregar Carro"
-    												+ "\nE) Alterar Cor                 	 F) Sair", menu);
+				 									+ "\nC) Retirar Veiculo           D) Alterar Cor"
+    												+ "\nF) Sair", menu);
     	switch(b) {
     	case "A", "a":
     		registraDadosFrota();
@@ -60,13 +60,6 @@ public class ProgramaLocadora {
     		this.locadora.frota.excluirVeiculo(exclui);
     		break;
     	case "D", "d":
-    		String x = JOptionPane.showInputDialog(null, "Digite o Modelo, Placa ou Renavam do veiculo", menu);
-			Boolean exist = this.locadora.frota.pesquisarVeiculo(x);
-			if(exist) {
-				locadora.frota.disponivelCarro(true, x);
-			}
-    		break;
-    	case "E", "e":
     		String altera = JOptionPane.showInputDialog(null, "Digite o Modelo, Placa ou Renavam do veiculo", menu);
 			Boolean existe = this.locadora.frota.pesquisarVeiculo(altera);
 			if(existe) {
@@ -408,7 +401,7 @@ public class ProgramaLocadora {
     	
     	locadora.cadastrarVeiculo(categoria, protecaoPropria, x, y, z, renavam, anoModelo, placa
     							, cor, Double.valueOf(valorSeguroProprio).doubleValue(), Double.valueOf(valorSeguroTerceiros).doubleValue(),
-    							Double.valueOf(valorImpostos).doubleValue(), Double.valueOf(valorDiaria).doubleValue(), Double.valueOf(valorMensal).doubleValue());    	
+    							Double.valueOf(valorImpostos).doubleValue(), Double.valueOf(valorDiaria).doubleValue(), Double.valueOf(valorMensal).doubleValue());    
     }
     
     public void optCShow() {
@@ -418,25 +411,52 @@ public class ProgramaLocadora {
 		switch(c) {
 			case "A", "a":
 				dadosReserva();
-				//locadora.cadastrarReserva();
 				break;
+			case "B", "b":
+				locadora.buscarReserva(JOptionPane.showInputDialog(null, "Digite o nome do Responsavel" ,menu));
+				return;
+			case "C", "c":
+				locadora.excluiReserva(JOptionPane.showInputDialog(null, "Digite o nome do Responsavel a ser excluido" ,menu));
+				return;
+			case "D", "d":
+				return;
+			default:
+				erroShow();
+				return;
 		} 
     }
     
     private void dadosReserva() {
 		String menu = "Cadastro Reservas";
+		String qtdDias = JOptionPane.showInputDialog(null, "Digite a quantidade de dias que deseja alugar");
 		String responsavel = JOptionPane.showInputDialog(null, "Digite o Nome/Identificacao do Responsavel");
-		Boolean check = this.locadora.buscar(responsavel);
-		if(check == false) {
-			return;
+		PessoaFisica respf; 
+		PessoaJuridica respj;
+		VeiculoPasseio vp;
+		Motocicleta mt;
+		VeiculoCarga vcarga;
+		Van van;
+		try {
+			respf = this.locadora.buscarPF(responsavel);
+			String busca = JOptionPane.showInputDialog(null, "Digite a Identificacao do Veiculo (Placa, CPF, Renavam");
+			vp = this.locadora.frota.retornaVP(busca);	
+			if(vp != null) {
+				try {
+					this.locadora.cadastrarReservaVP(responsavel, qtdDias, respf, vp);
+					return;
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, ex);
+					return;
+				}	
+			}else {
+				erroShow();
+				return;
+			}
+		}catch(Exception e) {
+			respj = this.locadora.buscarPJ(responsavel);
+			JOptionPane.showMessageDialog(null, "achou " + respj + e);
 		}
-		String veiculo = JOptionPane.showInputDialog(null, "Digite a Identificacao do Veiculo");
-		Boolean checkv = this.locadora.frota.pesquisarVeiculo(veiculo);
-		if(checkv == false) {
-			return;
-		}
-		
-	//	this.locadora.cadastrarReserva(responsavel, veiculo);
+		JOptionPane.showMessageDialog(null, "Responsavel/Veiculo nao encontrado");
 	}
 	public void optAShow() {
     	String n = JOptionPane.showInputDialog(null, "****************** Menu Gerência de Locatários *************"
@@ -451,7 +471,7 @@ public class ProgramaLocadora {
     			break;
     		case "C", "c":
     				String idnomeProcurado = JOptionPane.showInputDialog(null, "Digite o Nome, CPF ou CNPJ para procurar:", locadora.getNomeLocadora());
-    				locadora.buscar(idnomeProcurado);
+    				locadora.buscarPF(idnomeProcurado);
     		break;
     		case "D", "d":
     			String idnomeExcluir = JOptionPane.showInputDialog(null, "Digite o Nome, CPF ou CNPJ para remover:", locadora.getNomeLocadora());
