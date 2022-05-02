@@ -58,19 +58,20 @@ public class Valor {
 			valorTotal = diarias * (valorDiaria * 0.9);
 			break;
 		case "empresarial":
-			valorTotal = dairias * (valorDiaria * 0.7);
+			valorTotal = diarias * (valorDiaria * 0.7);
 			break;
 		case "mensal":
 			valorTotal = valorMensal * diarias/30;
 		}
 		
 		//determina valor com seguro
+		float valorSeguroOpc = 0;
 		if (seguroOpcional == true) {
-			valorTotal = valorTotal + (valorTotal*8/100);
+			valorSeguroOpc = valorTotal + (valorTotal*8/100);
 		}
 		
 		//outros impostos
-		valorTotal = valorTotal + (valorTotal * 12/100) + (valorTotal * 5/100);
+		valorTotal = valorTotal + (valorTotal * 12/100) + (valorTotal * 5/100) + valorSeguroOpc;
 		
 		return valorTotal;
 	}
