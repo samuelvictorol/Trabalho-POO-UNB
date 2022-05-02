@@ -1,8 +1,6 @@
 package AluguelCarros;
-import java.time.ZonedDateTime;
 
 abstract class Veiculo {
-	protected Boolean disponivel = true;
 	protected Boolean protecaoPropria;
 	protected String categoria;
 	protected String renavam;
@@ -39,11 +37,6 @@ abstract class Veiculo {
 	public String getRenavam() {
 		return this.renavam;
 	}
-	
-	public void setDisponivel(Boolean disponivel) {
-		this.disponivel = disponivel;
-	}
-
 	public String getCor() {
 		return this.cor;
 	}
@@ -94,8 +87,7 @@ abstract class Veiculo {
 		return    "\n*Ano de fabricação / modelo: " + this.anoModelo// + molde.anoModelo
 				+ "\n*Placa: " + this.placa 
 				+ "\n*Categoria: " + this.categoria
-				+ "\n*Protecao Propria: " + this.protecaoPropria// 
-				+ "\n*Disponivel: " + this.disponivel
+				+ "\n*Protecao Propria: " + this.protecaoPropria
 				+ "\n------------------------------------------------------------------------------"
 				+ "\n*Valor Seguro Proprio: " + this.valorSeguroProprio
 				+ "\n*Valor do seguro de terceiros: " + this.valorSeguroTerceiros

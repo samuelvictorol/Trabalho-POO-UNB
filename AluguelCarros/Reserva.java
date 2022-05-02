@@ -1,35 +1,50 @@
-/*package AluguelCarros;
+package AluguelCarros;
 import java.time.ZonedDateTime;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import java.util.Random;
 
-import java.text.DecimalFormat;
 public class Reserva {
-	public String resp:
-	PessoaFisi responsavel, veiculo;
-	private String codigo;
+	String responsavel = "";
+	PessoaFisica pf; 
+	PessoaJuridica pj;
+	VeiculoPasseio vp;
+	Motocicleta mt;
+	VeiculoCarga vcarga;
+	Van van;
+	Random codigo;
 	private String conteudo;
+	public String  horarioReserva;
 	
-	public void setConteudo(String pessoa){
+	public void setConteudoPF(String pessoa){
 		this.conteudo =  "********* (SUA RESERVA NA LOCADORA GRUPO 10 UNB) *********"
 							+ "\n*Reserva: " + this.codigo 
 							+ "\n*Locatario: " + this.pf.getNomeLocatario()
-							+ "\n*Responsável: " + 
-							+ "\n*Identificação(CPF/CNPJ): this.pf.getCpf();"
+							+ "\n*Responsável: " + this.responsavel
+							+ "\n*Tipo Pessoa: " + pessoa
+							+ "\n*Identificação(CPF/CNPJ):" + this.pf.getCpf()
 							+ "\n------------------------------------------------"
-							+ "\nHorario pedido de reserva: " + this.horarioReserva
+							+ "\n*Horario pedido de reserva: \n" + this.horarioReserva
+							+ "\n*Valor Seguro Proprio : " +this.vp.getValorSeguroProprio()
+							+ "\n*Valor Seguro Terceiros: " +this.vp.getValorSeguroTerceiros()
+							+ "\n*Valor Impostos: " + this.vp.getValorImpostos()
+							+ "\n*Valor Total: " +this.vp.getValorTotal()
+							+ "\n------------------------------------------------"
+							+ this.vp.info();
 			
 				
 	}
-	public Reserva(Object responsavel, Object veiculo, Double dias) {
+	public Reserva(String responsavel) {
 		this.codigo = new Random();
 		this.horarioReserva = ZonedDateTime.now().toString();
-		this.responsavel = this.responsavel;
-		this.veiculo = veiculo;
+		this.responsavel = responsavel;
+	}
+	public void fillReserva(PessoaFisica p, VeiculoPasseio vp) {
+		this.pf = p;
+		this.vp = vp;
+		setConteudoPF("Pessoa Fisica");
 	}
 	public void info() {
 		JOptionPane.showMessageDialog(null, conteudo);
 	}
+
 }
-*/

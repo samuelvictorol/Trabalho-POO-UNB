@@ -7,16 +7,13 @@ public class Locadora {
 	//Atributos
 	public int MAX_LOC = 50;
 	public String nomeLocadora;
-	public int qtdLocatarios;
 	ArrayList<PessoaFisica> pessoasFisica = new ArrayList<PessoaFisica>();
 	ArrayList<PessoaJuridica> pessoasJuridica = new ArrayList<PessoaJuridica>();
-	//ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	Frota frota = new Frota();
 	//Metodos
 	
 	public Locadora(String nomeLocadora) {
-		this.nomeLocadora = nomeLocadora;
-		this.qtdLocatarios = 0;
 		frota = new Frota();
 	}
 	
@@ -24,23 +21,28 @@ public class Locadora {
 		return this.nomeLocadora;
 	}
 
-	public Boolean buscar(String idnomePF) {
+	public PessoaFisica buscarPF(String idnomePF) {
 			for(PessoaFisica pf : pessoasFisica){
 				if(idnomePF.equals(pf.getNomeLocatario()) || idnomePF.equals(pf.getCpf())){
 					JOptionPane.showMessageDialog(null, "Pessoa Fisica encontrada no sistema!");
 					pf.info();
-					return true;	
+					return pf;	
 				}
 			}
+			JOptionPane.showMessageDialog(null, "Invalido ou Não Cadastrado!");		
+			return null;
+	}
+	public PessoaJuridica buscarPJ(String idnomePF) {
 			for(PessoaJuridica pj : pessoasJuridica){
 				if(idnomePF.equals(pj.getNomeLocatario()) || idnomePF.equals(pj.getCnpj())){
 					JOptionPane.showMessageDialog(null, "Pessoa Juridica encontrada no sistema!");
 					pj.info();
-					return true;	
+					return pj;	
 				}
+				return null;
 			}
 		JOptionPane.showMessageDialog(null, "Invalido ou Não Cadastrado!");			
-		return false;
+		return null;
 	}
 	
 	public void excluir(String idnomePF) {
@@ -80,7 +82,6 @@ public class Locadora {
 		pf.setEstadoCivil(Estado_civil);
 		pf.info();
 		this.pessoasFisica.add(pf);
-		this.qtdLocatarios++; 
 	}
 	
 	
@@ -97,7 +98,6 @@ public class Locadora {
 		pj.info();
 		
 		this.pessoasJuridica.add(pj);
-		this.qtdLocatarios++; 
 	}
 	
 	public void cadastrarVeiculo(String categoria, Boolean protecaoPropria, Boolean x, Boolean y
@@ -108,6 +108,7 @@ public class Locadora {
 		if(categoria.equals("Veiculo Passeio")) {
 			this.frota.cadastrarCarro(categoria, protecaoPropria, x, y, z, renavam, anoModelo, placa
 					  				, cor, valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+
 		}
 		if(categoria.equals("Motocicleta")) {
 			this.frota.cadastrarMoto(categoria, protecaoPropria, x, y,
@@ -117,15 +118,34 @@ public class Locadora {
 		
 	}
 
-/*	public void cadastrarReserva(String responsavel, String veiculo) {
-		Reserva r;
-		Object resp, veic;
-		foFisica p : this.pessoasFisica) {
-			
-		}
-		r = new Reserva(resp, veic);
+	public void cadastrarReservaVP(String responsavel, String qtdDias,  PessoaFisica pf, VeiculoPasseio v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pf, v);
+		r.info();
 		this.reservas.add(r);
-	}*/
+		
+	}
+	public void buscarReserva(String busca) {
+		for(Reserva r : reservas) {
+			if(r.responsavel.equals(busca)) {
+				r.info();
+				return;
+			}
+		}
+		JOptionPane.showMessageDialog(null, "Reserva nao Encontrada/Registrada");	
+	}
+	public void excluiReserva(String busca) {
+		for(Reserva r : reservas) {
+			if(r.responsavel.equals(busca)) {
+				r.info();
+				reservas.remove(r);
+				JOptionPane.showMessageDialog(null, "Reserva Excluida com sucesso");
+				return;
+			}
+		}
+		JOptionPane.showMessageDialog(null, "Reserva nao Encontrada/Registrada");	
+	}
 
 	public void cadastrarVCarga(Boolean motorista, String categoria, Boolean protecaoPropria, String x
 			, String renavam, String anoModelo,String placa,String cor

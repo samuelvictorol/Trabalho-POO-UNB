@@ -2,7 +2,7 @@ package AluguelCarros;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class Frota {
+public class Frota{
 	ArrayList<VeiculoPasseio> carros;
 	ArrayList<Motocicleta> motos;
 	ArrayList<VeiculoCarga> vcargas;
@@ -28,8 +28,7 @@ public class Frota {
 		vp.setPlaca(placa);
 		vp.setCor(cor);
 		vp.setValorVeiculo(valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
-		vp.info();
-		
+		JOptionPane.showMessageDialog(null, vp.info());
 		this.carros.add(vp);
 	}
 	public void cadastrarMoto(String categoria, Boolean protecaoPropria, Boolean controleTracao, Boolean freioABS, 
@@ -124,6 +123,16 @@ public class Frota {
 			JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");			 
 			return false;
 	}
+	public VeiculoPasseio retornaVP(String pesquisa) {
+		for(VeiculoPasseio v : this.carros) {
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
+				JOptionPane.showMessageDialog(null, v.info());
+				return v;
+		    }
+		}
+		return null;
+	}
 		
 	public void alterarCor(String cor, String pesquisa) {
 		for(VeiculoPasseio vp : this.carros){
@@ -206,43 +215,52 @@ public class Frota {
 		 
 	}
 
-	public void disponivelCarro(boolean b, String pesquisa) {
+	/*public VeiculoPasseio disponivelVeiculo(boolean b, String pesquisa) {
 		for(VeiculoPasseio vp : this.carros){
 		    if(pesquisa.equals(vp.getPlaca()) || pesquisa.equals(vp.getAnoModelo()) || pesquisa.equals(vp.getRenavam())){
 				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
 				vp.setDisponivel(b);
 				JOptionPane.showMessageDialog(null, vp.info());
-				return;
+				return vp;
 		    }
 		}
-		
+		JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");	
+		return null;
+	}
+	public Motocicleta disponivelVeiculo(boolean b, String pesquisa) {
 		for(Motocicleta mt : this.motos){
 			if(pesquisa.equals(mt.getPlaca()) || pesquisa.equals(mt.getAnoModelo()) || pesquisa.equals(mt.getRenavam())){
 				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
 				mt.setDisponivel(b);
 				JOptionPane.showMessageDialog(null, mt.info());
-					return ;
+					return mt;
 				}
 		}
+	}
+	public Motocicleta disponivel(boolean b, String pesquisa) {
 		for(VeiculoCarga v : this.vcargas){
 			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
 				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
 				v.setDisponivel(b);
-				JOptionPane.showMessageDialog(null, v.info());
-				
-					return ;
+				JOptionPane.showMessageDialog(null, v.info());		
+					return v;
 				}
+			
 		}
+		JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");	
+		return null;
+}
 		for(Van v : this.vans){
 			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
 				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
 				v.setDisponivel(b);
 				JOptionPane.showMessageDialog(null, v.info());
-					return ;
+					return v;
 				}
 		}	
-		
+		JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");	
+		return null;
 	}
 
-	
+*/	
 }
