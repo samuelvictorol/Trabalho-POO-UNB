@@ -1,7 +1,6 @@
 package AluguelCarros;
 
 public class VeiculoPasseio extends Veiculo {
-
 	private Boolean arCondicionado;
 	private Boolean direcaoHidraulica;
 	private Boolean cambioAutomatico;

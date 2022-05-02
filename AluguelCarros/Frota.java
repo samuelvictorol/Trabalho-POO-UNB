@@ -4,23 +4,25 @@ import javax.swing.JOptionPane;
 
 public class Frota {
 	ArrayList<VeiculoPasseio> carros;
-	//ArrayList<Moto> motos;
-	//ArrayList<Utilitario> utilitarios;
+	ArrayList<Motocicleta> motos;
+	ArrayList<VeiculoCarga> vcargas;
+	ArrayList<Van> vans;
 	public Frota() {
 		 this.carros = new ArrayList<VeiculoPasseio>();
-		 //this.motos = new ArrayList<Moto>();
-		// this.utilitarios = new ArrayList<Utilitario>();
+		 this.motos = new ArrayList<Motocicleta>();
+		 this.vcargas = new ArrayList<VeiculoCarga>();
+		 this.vans = new ArrayList<Van>();
 	}
 		
-	public void cadastrarCarro(String categoria, Boolean protecaoPropria, Boolean arCondicionado, Boolean direcaoHidraulica, 
-								Boolean cambioAutomatico, String renavam, String anoModelo,String placa,String cor,
+	public void cadastrarCarro(String categoria, Boolean protecaoPropria, Boolean x, Boolean y, 
+								Boolean z, String renavam, String anoModelo,String placa,String cor,
 								Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos, Double valorDiaria, Double valorMensal) {
 		VeiculoPasseio vp = new VeiculoPasseio();
 		vp.setCategoria(categoria);
 		vp.setProtecaoPropria(protecaoPropria);
-		vp.setArCondicionado(arCondicionado);
-		vp.setDirecaoHidraulica(direcaoHidraulica);
-		vp.setCambioAutomatico(cambioAutomatico);
+		vp.setArCondicionado(x);
+		vp.setDirecaoHidraulica(y);
+		vp.setCambioAutomatico(z);
 		vp.setRenavam(renavam);
 		vp.setAnoModelo(anoModelo);
 		vp.setPlaca(placa);
@@ -30,43 +32,217 @@ public class Frota {
 		
 		this.carros.add(vp);
 	}
+	public void cadastrarMoto(String categoria, Boolean protecaoPropria, Boolean controleTracao, Boolean freioABS, 
+								Boolean pilotoAutomatico, String renavam, String anoModelo,String placa,String cor,
+								Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos, Double valorDiaria, Double valorMensal) {
+		JOptionPane.showMessageDialog(null, "teste frota");
+		Motocicleta mt = new Motocicleta();
+			mt.setCategoria(categoria);
+			mt.setProtecaoPropria(protecaoPropria);
+			mt.setControleTracao(controleTracao);
+			mt.setFreioABS(freioABS);
+			mt.setPilotoAutomatico(pilotoAutomatico);
+			mt.setRenavam(renavam);
+			mt.setAnoModelo(anoModelo);
+			mt.setPlaca(placa);
+			mt.setCor(cor);
+			mt.setValorVeiculo(valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+			JOptionPane.showMessageDialog(null, mt.info());
+				
+			this.motos.add(mt);
+	}
 	
-	public void pesquisarVeiculo(String pesquisa) {
+	public void cadastrarVCarga(Boolean motorista, String categoria, Boolean protecaoPropria, String x, 
+								String renavam, String anoModelo,String placa,String cor,
+								Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos, Double valorDiaria, Double valorMensal) {
+			VeiculoCarga vc = new VeiculoCarga();
+			vc.setMotorista(motorista);
+			vc.setCategoria(categoria);
+			vc.setProtecaoPropria(protecaoPropria);
+			vc.setCapacidade(x);
+			vc.setRenavam(renavam);
+			vc.setAnoModelo(anoModelo);
+			vc.setPlaca(placa);
+			vc.setCor(cor);
+			vc.setValorVeiculo(valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+			JOptionPane.showMessageDialog(null, vc.info());
+			
+			this.vcargas.add(vc);
+		
+	}
+	
+	public void cadastrarVan(Boolean motorista, String categoria, Boolean protecaoPropria, String x, String renavam,
+			String anoModelo, String placa, String cor, Double valorSeguroProprio, Double valorSeguroTerceiros,
+			Double valorImpostos, Double valorDiaria, Double valorMensal) {
+		Van v = new Van();
+		v.setMotorista(motorista);
+		v.setCategoria(categoria);
+		v.setProtecaoPropria(protecaoPropria);
+		v.setCapacidadePessoas(x);
+		v.setRenavam(renavam);
+		v.setAnoModelo(anoModelo);
+		v.setPlaca(placa);
+		v.setCor(cor);
+		v.setValorVeiculo(valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+		JOptionPane.showMessageDialog(null, v.info());
+		
+		this.vans.add(v);
+		
+	}
+	
+	public Boolean pesquisarVeiculo(String pesquisa) {
 			for(VeiculoPasseio vp : this.carros){
 			    if(pesquisa.equals(vp.getPlaca()) || pesquisa.equals(vp.getAnoModelo()) || pesquisa.equals(vp.getRenavam())){
 					JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
 					JOptionPane.showMessageDialog(null, vp.info());
-					return;
+					return true;
 			    }
 			}
-			      JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");	
+			
+			for(Motocicleta mt : this.motos){
+				if(pesquisa.equals(mt.getPlaca()) || pesquisa.equals(mt.getAnoModelo()) || pesquisa.equals(mt.getRenavam())){
+					JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
+					JOptionPane.showMessageDialog(null, mt.info());
+						return true;
+					}
+			}
+			for(VeiculoCarga v : this.vcargas){
+				if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+					JOptionPane.showMessageDialog(null, "Veiculo encontrado no sistema!");
+					JOptionPane.showMessageDialog(null, v.info());
+						return true;
+					}
+			}
+			for(Van v : this.vans){
+				if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+					JOptionPane.showMessageDialog(null, "Veiculo encontrado no sistema!");
+					JOptionPane.showMessageDialog(null, v.info());
+						return true;
+					}
+			}
+			
+			JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");			 
+			return false;
 	}
 		
-	public void alterarCor(String cor, String placa) {
-		for(VeiculoPasseio vp :this. carros){
-		    if(placa.equals(vp.placa)){
-				JOptionPane.showMessageDialog(null, "Cor alterada!");
+	public void alterarCor(String cor, String pesquisa) {
+		for(VeiculoPasseio vp : this.carros){
+		    if(pesquisa.equals(vp.getPlaca()) || pesquisa.equals(vp.getAnoModelo()) || pesquisa.equals(vp.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Cor Alterada no sistema!");
 				vp.setCor(cor);
 				JOptionPane.showMessageDialog(null, vp.info());
 				return;
 		    }
 		}
-		      JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");
-			
-	
+		
+		for(Motocicleta mt : this.motos){
+			if(pesquisa.equals(mt.getPlaca()) || pesquisa.equals(mt.getAnoModelo()) || pesquisa.equals(mt.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Cor Alterada no sistema!");
+				mt.setCor(cor);
+				JOptionPane.showMessageDialog(null, mt.info());
+					return ;
+				}
+		}
+		for(VeiculoCarga v : this.vcargas){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Cor Alterada no sistema!");
+				v.setCor(cor);
+				JOptionPane.showMessageDialog(null, v.info());
+				
+					return ;
+				}
+		}
+		for(Van v : this.vans){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Cor Alterada no sistema!");
+				v.setCor(cor);
+				JOptionPane.showMessageDialog(null, v.info());
+					return ;
+				}
+		}			
 	}
 	
-	/*public void excluirVeiculo(String placa) {
-		for(Veiculo v : veiculos){
-		    if(placa.equals(v.placa)){
-				JOptionPane.showMessageDialog(null, "Veiculo removido do sistema!");
-				v.info();
-				veiculos.remove(v);
+	public void excluirVeiculo(String pesquisa) {
+		for(VeiculoPasseio v : this.carros){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrado no sistema!");
+				JOptionPane.showMessageDialog(null, v.info());
+				JOptionPane.showMessageDialog(null, "Veiculo Retirado de Frota!");
+				carros.remove(v);
+					return;
+				}
+		}
+		for(Motocicleta v : this.motos){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrado no sistema!");
+				JOptionPane.showMessageDialog(null, v.info());
+				JOptionPane.showMessageDialog(null, "Veiculo Retirado de Frota!");
+				motos.remove(v);
+					return;
+				}
+		}
+		
+		for(VeiculoCarga v : this.vcargas){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrado no sistema!");
+				JOptionPane.showMessageDialog(null, v.info());
+				JOptionPane.showMessageDialog(null, "Veiculo Retirado de Frota!");
+				vcargas.remove(v);
+					return;
+				}
+		}
+		for(Van v : this.vans){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrado no sistema!");
+				JOptionPane.showMessageDialog(null, v.info());
+				JOptionPane.showMessageDialog(null, "Veiculo Retirado de Frota!");
+				vans.remove(v);
+					return;
+				}
+		}
+		
+		
+		      JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");
+		 
+	}
+
+	public void disponivelCarro(boolean b, String pesquisa) {
+		for(VeiculoPasseio vp : this.carros){
+		    if(pesquisa.equals(vp.getPlaca()) || pesquisa.equals(vp.getAnoModelo()) || pesquisa.equals(vp.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
+				vp.setDisponivel(b);
+				JOptionPane.showMessageDialog(null, vp.info());
 				return;
 		    }
 		}
-		      JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");
+		
+		for(Motocicleta mt : this.motos){
+			if(pesquisa.equals(mt.getPlaca()) || pesquisa.equals(mt.getAnoModelo()) || pesquisa.equals(mt.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
+				mt.setDisponivel(b);
+				JOptionPane.showMessageDialog(null, mt.info());
+					return ;
+				}
+		}
+		for(VeiculoCarga v : this.vcargas){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
+				v.setDisponivel(b);
+				JOptionPane.showMessageDialog(null, v.info());
+				
+					return ;
+				}
+		}
+		for(Van v : this.vans){
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Carro Disponivel?");
+				v.setDisponivel(b);
+				JOptionPane.showMessageDialog(null, v.info());
+					return ;
+				}
+		}	
+		
 	}
-	*/
 
+	
 }

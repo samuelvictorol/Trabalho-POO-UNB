@@ -24,22 +24,23 @@ public class Locadora {
 		return this.nomeLocadora;
 	}
 
-	public void buscar(String idnomePF) {
+	public Boolean buscar(String idnomePF) {
 			for(PessoaFisica pf : pessoasFisica){
 				if(idnomePF.equals(pf.getNomeLocatario()) || idnomePF.equals(pf.getCpf())){
 					JOptionPane.showMessageDialog(null, "Pessoa Fisica encontrada no sistema!");
 					pf.info();
-					return;	
+					return true;	
 				}
 			}
 			for(PessoaJuridica pj : pessoasJuridica){
 				if(idnomePF.equals(pj.getNomeLocatario()) || idnomePF.equals(pj.getCnpj())){
 					JOptionPane.showMessageDialog(null, "Pessoa Juridica encontrada no sistema!");
 					pj.info();
-					return;	
+					return true;	
 				}
 			}
 		JOptionPane.showMessageDialog(null, "Invalido ou Não Cadastrado!");			
+		return false;
 	}
 	
 	public void excluir(String idnomePF) {
@@ -78,7 +79,6 @@ public class Locadora {
 		pf.setTelefone(Telefone);
 		pf.setEstadoCivil(Estado_civil);
 		pf.info();
-		
 		this.pessoasFisica.add(pf);
 		this.qtdLocatarios++; 
 	}
@@ -99,23 +99,55 @@ public class Locadora {
 		this.pessoasJuridica.add(pj);
 		this.qtdLocatarios++; 
 	}
-
-	public void cadastrarVeiculo(String categoria, Boolean protecaoPropria, Boolean arCondicionado, Boolean direcaoHidraulica
-								, Boolean cambioAutomatico, String renavam, String anoModelo,String placa,String cor
+	
+	public void cadastrarVeiculo(String categoria, Boolean protecaoPropria, Boolean x, Boolean y
+								, Boolean z, String renavam, String anoModelo,String placa,String cor
 								, Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos
 								, Double valorDiaria, Double valorMensal) {
 								
 		if(categoria.equals("Veiculo Passeio")) {
-			this.frota.cadastrarCarro(categoria, protecaoPropria, arCondicionado, direcaoHidraulica, cambioAutomatico, renavam, anoModelo, placa
+			this.frota.cadastrarCarro(categoria, protecaoPropria, x, y, z, renavam, anoModelo, placa
 					  				, cor, valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
 		}
+		if(categoria.equals("Motocicleta")) {
+			this.frota.cadastrarMoto(categoria, protecaoPropria, x, y,
+										z, renavam, anoModelo,placa,cor,
+										valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+		}
+		
 	}
-		
-	public void cadastrarReserva() {
-		
+
+/*	public void cadastrarReserva(String responsavel, String veiculo) {
+		Reserva r;
+		Object resp, veic;
+		foFisica p : this.pessoasFisica) {
+			
+		}
+		r = new Reserva(resp, veic);
+		this.reservas.add(r);
+	}*/
+
+	public void cadastrarVCarga(Boolean motorista, String categoria, Boolean protecaoPropria, String x
+			, String renavam, String anoModelo,String placa,String cor
+			, Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos
+			, Double valorDiaria, Double valorMensal) {
+		if(categoria.equals("Carga")) {
+			this.frota.cadastrarVCarga(motorista, categoria, protecaoPropria, x, renavam, anoModelo,placa,cor,
+										valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+		}
 		
 	}
 	
+	public void cadastrarVan(Boolean motorista, String categoria, Boolean protecaoPropria, String x
+			, String renavam, String anoModelo,String placa,String cor
+			, Double valorSeguroProprio, Double valorSeguroTerceiros, Double valorImpostos
+			, Double valorDiaria, Double valorMensal) {
+		if(categoria.equals("Van")) {
+			this.frota.cadastrarVan(motorista, categoria, protecaoPropria, x, renavam, anoModelo,placa,cor,
+										valorSeguroProprio, valorSeguroTerceiros, valorImpostos, valorDiaria, valorMensal);
+		}
+		
+	}
 	
 	
 	
