@@ -88,6 +88,7 @@ abstract class Veiculo {
 				+ "\n*Placa: " + this.placa 
 				+ "\n*Categoria: " + this.categoria
 				+ "\n*Protecao Propria: " + this.protecaoPropria
+				+ "\n*Cor: " + this.cor
 				+ "\n------------------------------------------------------------------------------"
 				+ "\n*Valor Seguro Proprio: " + this.valorSeguroProprio
 				+ "\n*Valor do seguro de terceiros: " + this.valorSeguroTerceiros

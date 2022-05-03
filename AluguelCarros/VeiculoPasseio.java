@@ -40,7 +40,6 @@ public class VeiculoPasseio extends Veiculo {
 	public VeiculoPasseio retornaVP() {
 		return this;
 	}
-	
 	public String info() {
 		return 	super.infoString() +
 				"\n*Ar Condicionado: " + this.arCondicionado +

@@ -118,13 +118,65 @@ public class Locadora {
 		
 	}
 
-	public void cadastrarReservaVP(String responsavel, String qtdDias,  PessoaFisica pf, VeiculoPasseio v) {
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaFisica pf, Motocicleta v) {
 		Reserva r = new Reserva(responsavel);
 		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
 		r.fillReserva(pf, v);
 		r.info();
 		this.reservas.add(r);
 		
+	}
+	
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaFisica pf, VeiculoPasseio v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pf, v);
+		r.info();
+		this.reservas.add(r);	
+	}
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaFisica pf,  VeiculoCarga v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pf, v);
+		r.info();
+		this.reservas.add(r);
+	}
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaFisica pf,  Van v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pf, v);
+		r.info();
+		this.reservas.add(r);
+	}
+	public void cadastrarReserva(String responsavel, String qtdDias, PessoaJuridica pj, Motocicleta v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pj, v);
+		r.info();
+		this.reservas.add(r);
+		
+	}
+	
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaJuridica pj, VeiculoPasseio v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pj, v);
+		r.info();
+		this.reservas.add(r);	
+	}
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaJuridica pj,  VeiculoCarga v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pj, v);
+		r.info();
+		this.reservas.add(r);
+	}
+	public void cadastrarReserva(String responsavel, String qtdDias,  PessoaJuridica pj,  Van v) {
+		Reserva r = new Reserva(responsavel);
+		v.setValorTotal(Double.parseDouble(qtdDias.replaceAll(",", ".")));
+		r.fillReserva(pj, v);
+		r.info();
+		this.reservas.add(r);
 	}
 	public void buscarReserva(String busca) {
 		for(Reserva r : reservas) {
@@ -168,7 +220,7 @@ public class Locadora {
 		}
 		
 	}
-	
+
 	
 	
 	

@@ -127,13 +127,39 @@ public class Frota{
 		for(VeiculoPasseio v : this.carros) {
 			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
 				JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
-				JOptionPane.showMessageDialog(null, v.info());
 				return v;
 		    }
 		}
 		return null;
 	}
-		
+
+	public Motocicleta retornaMT(String pesquisa) {
+		for(Motocicleta v : this.motos) {
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
+				return v;
+		    }
+		}
+		return null;
+	}
+	public VeiculoCarga retornaVC(String pesquisa) {
+		for(VeiculoCarga v : this.vcargas) {
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
+				return v;
+		    }
+		}
+		return null;
+	}
+	public Van retornaVan(String pesquisa) {
+		for(Van v : this.vans) {
+			if(pesquisa.equals(v.getPlaca()) || pesquisa.equals(v.getAnoModelo()) || pesquisa.equals(v.getRenavam())){
+				JOptionPane.showMessageDialog(null, "Veiculo encontrada no sistema!");
+				return v;
+		    }
+		}
+		return null;
+	}
 	public void alterarCor(String cor, String pesquisa) {
 		for(VeiculoPasseio vp : this.carros){
 		    if(pesquisa.equals(vp.getPlaca()) || pesquisa.equals(vp.getAnoModelo()) || pesquisa.equals(vp.getRenavam())){
@@ -214,6 +240,7 @@ public class Frota{
 		      JOptionPane.showMessageDialog(null, "Este veiculo não foi encontrado no sistema!");
 		 
 	}
+
 
 	/*public VeiculoPasseio disponivelVeiculo(boolean b, String pesquisa) {
 		for(VeiculoPasseio vp : this.carros){
