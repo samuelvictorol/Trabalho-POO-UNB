@@ -1,7 +1,8 @@
 # LOCADORA DE VEICULOS
 
 # Trabalho de Orientação a Objetos  UnB - FGA ~ Grupo 10
--OBS: Diagramas estão na pasta Diagramas na branch principal (Main)
+- OBS: Diagramas estão na pasta Diagramas na branch principal (Main)
+- OBS: Caso o programa não rode, altere o norme do arquivo Index.Java para Index.java 
 # MEMBROS:
 - Samuel Victor Oliveira Lima - 190059001
 - Ana Luiza Hoffmann Ferreira - 202015901
