@@ -1,14 +1,12 @@
 package AluguelCarros;
 
 public class VeiculoPasseio extends Veiculo {
-
 	private Boolean arCondicionado;
 	private Boolean direcaoHidraulica;
 	private Boolean cambioAutomatico;
 	
 	public VeiculoPasseio() {
 		super();
-		this.setDisponivel(true);
 	}
 	
 	public boolean getArCondicionado() {
@@ -39,7 +37,9 @@ public class VeiculoPasseio extends Veiculo {
 	public void setCambioAutomatico(Boolean cambioAutomatico) {
 		this.cambioAutomatico = cambioAutomatico;
 	}
-	
+	public VeiculoPasseio retornaVP() {
+		return this;
+	}
 	public String info() {
 		return 	super.infoString() +
 				"\n*Ar Condicionado: " + this.arCondicionado +

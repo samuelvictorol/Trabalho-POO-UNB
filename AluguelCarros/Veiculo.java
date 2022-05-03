@@ -1,16 +1,12 @@
 package AluguelCarros;
-import java.time.ZonedDateTime;
 
 abstract class Veiculo {
-	protected Boolean disponivel;
 	protected Boolean protecaoPropria;
 	protected String categoria;
 	protected String renavam;
 	protected String anoModelo;
 	protected String placa;
 	protected String cor;
-	protected String horarioReserva;
-	protected String dataEntrega;
 	protected double valorTotal;
 	protected double valorSeguroProprio;
 	protected double valorSeguroTerceiros;
@@ -34,12 +30,6 @@ abstract class Veiculo {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public void setHorarioReserva() {	
-		this.horarioReserva = ZonedDateTime.now().toString();
-	}
-	public void setDataEntrega(String dataEntrega) {
-		this.dataEntrega = dataEntrega;
-	}
 
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
@@ -47,11 +37,6 @@ abstract class Veiculo {
 	public String getRenavam() {
 		return this.renavam;
 	}
-	
-	public void setDisponivel(Boolean disponivel) {
-		this.disponivel = disponivel;
-	}
-
 	public String getCor() {
 		return this.cor;
 	}
@@ -64,17 +49,10 @@ abstract class Veiculo {
 	public String getPlaca() {
 		return this.placa;
 	}
-	public String getHorarioReserva() {
-		return this.horarioReserva;
-	}
-	
-	public String getDataEntrega() {
-		return this.dataEntrega;
-	}
 	
 	public double getValorTotal() {
 		return this.valorTotal;
-	}
+	} 
 	
 	public double getValorSeguroProprio() {
 		return this.valorSeguroProprio;
@@ -94,7 +72,6 @@ abstract class Veiculo {
 		this.valorMensal = valorMensal;
 		this.valorTotal =  valorSeguroProprio + valorSeguroTerceiros + valorImpostos; 
 	}
-	
 	public void setValorTotal(double qtdDias) {
 		if(qtdDias >= 30 && qtdDias < 59) {
 			this.valorTotal += (this.valorMensal * 1);
@@ -107,12 +84,11 @@ abstract class Veiculo {
 		}
 	}
 	public String infoString() {
-		return  "\n*Veiculo: " + this.categoria
-				+ "\n*Ano de fabricação / modelo: " + this.anoModelo// + molde.anoModelo
+		return    "\n*Ano de fabricação / modelo: " + this.anoModelo// + molde.anoModelo
 				+ "\n*Placa: " + this.placa 
 				+ "\n*Categoria: " + this.categoria
-				+ "\n*Protecao Propria: " + this.protecaoPropria// 
-				+ "\n*Disponivel: " + this.disponivel
+				+ "\n*Protecao Propria: " + this.protecaoPropria
+				+ "\n*Cor: " + this.cor
 				+ "\n------------------------------------------------------------------------------"
 				+ "\n*Valor Seguro Proprio: " + this.valorSeguroProprio
 				+ "\n*Valor do seguro de terceiros: " + this.valorSeguroTerceiros

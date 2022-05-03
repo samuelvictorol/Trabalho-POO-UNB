@@ -1,6 +1,6 @@
-# TrabalhoOO
+# LOCADORA DE VEICULOS
 
-# Trabalho de Orientação a Objetos  UnB - FGA ~ Grupo 10.
+# Trabalho de Orientação a Objetos  UnB - FGA ~ Grupo 10
 
 # MEMBROS:
 - Samuel Victor Oliveira Lima - 190059001
