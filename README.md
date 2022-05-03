@@ -1,4 +1,4 @@
-# TrabalhoOO
+# Trabalho Orientacao a Objetos
 
 # Trabalho de Orientação a Objetos  UnB - FGA ~ Grupo 10.
 
