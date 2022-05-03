@@ -12,7 +12,6 @@ public class PessoaJuridica extends Locatarios {
 		public PessoaJuridica() {
 			super();
 		}
-			
 		public void setIdade(int idade) {
 			this.idade = idade;
 		}
