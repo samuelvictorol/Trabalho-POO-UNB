@@ -16,7 +16,7 @@ abstract class Utilitario extends Veiculo{
 	public String infoStr() {
 		String info;
 			if(this.motorista == false) {
-				info = super.infoString() + "\n*Aluguem Sem Motorista Particular";
+				info = super.infoString() + "\n*Aluguel Sem Motorista Particular";
 			}else {
 				info = super.infoString() + "\n*Aluguel Com Motorista Particular"
 						 + "\n*Motorista: " + this.nomeMotorista

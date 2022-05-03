@@ -1,7 +1,7 @@
 package AluguelCarros;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.List;
+
 public class ProgramaLocadora {
 	//Todas as funcoes de escolha estao nessa classe
 	
@@ -427,36 +427,67 @@ public class ProgramaLocadora {
     }
     
     private void dadosReserva() {
-		String menu = "Cadastro Reservas";
-		String qtdDias = JOptionPane.showInputDialog(null, "Digite a quantidade de dias que deseja alugar");
-		String responsavel = JOptionPane.showInputDialog(null, "Digite o Nome/Identificacao do Responsavel");
 		PessoaFisica respf; 
 		PessoaJuridica respj;
 		VeiculoPasseio vp;
 		Motocicleta mt;
 		VeiculoCarga vcarga;
 		Van van;
-		try {
+		String qtdDias = JOptionPane.showInputDialog(null, "Digite a quantidade de dias que deseja alugar");
+		String responsavel = JOptionPane.showInputDialog(null, "Digite o Nome/Identificacao do Responsavel");
+		String busca = JOptionPane.showInputDialog(null, "Digite a Identificacao do Veiculo (Modelo, placa ou Renavam)");
+		if((van = this.locadora.frota.retornaVan(busca)) != null && (respf = this.locadora.buscarPF(responsavel)) != null) {
 			respf = this.locadora.buscarPF(responsavel);
-			String busca = JOptionPane.showInputDialog(null, "Digite a Identificacao do Veiculo (Placa, CPF, Renavam");
+			van = this.locadora.frota.retornaVan(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respf, van);
+			return;
+		}if ((vcarga= this.locadora.frota.retornaVC(busca)) != null && (respf = this.locadora.buscarPF(responsavel)) != null) {
+			respf = this.locadora.buscarPF(responsavel);
+			vcarga = this.locadora.frota.retornaVC(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respf, vcarga);
+			return;
+		}if ((mt = this.locadora.frota.retornaMT(busca)) != null && (respf = this.locadora.buscarPF(responsavel)) != null) {
+			respf = this.locadora.buscarPF(responsavel);
+			mt = this.locadora.frota.retornaMT(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respf, mt);
+			return;
+		} if ((vp = this.locadora.frota.retornaVP(busca)) != null && (respf = this.locadora.buscarPF(responsavel)) != null) {
+			respf = this.locadora.buscarPF(responsavel);
 			vp = this.locadora.frota.retornaVP(busca);	
-			if(vp != null) {
-				try {
-					this.locadora.cadastrarReservaVP(responsavel, qtdDias, respf, vp);
-					return;
-				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, ex);
-					return;
-				}	
-			}else {
-				erroShow();
-				return;
-			}
-		}catch(Exception e) {
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respf, vp);
+			return;
+		} if((van = this.locadora.frota.retornaVan(busca)) != null && (respf = this.locadora.buscarPF(responsavel)) != null) {
 			respj = this.locadora.buscarPJ(responsavel);
-			JOptionPane.showMessageDialog(null, "achou " + respj + e);
+			van = this.locadora.frota.retornaVan(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respj, van);
+			return;
+		}if((van = this.locadora.frota.retornaVan(busca)) != null && (respf = this.locadora.buscarPF(responsavel)) != null) {
+			respf = this.locadora.buscarPF(responsavel);
+			van = this.locadora.frota.retornaVan(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respf, van);
+			return;
+		}if ((vcarga= this.locadora.frota.retornaVC(busca)) != null && (respj = this.locadora.buscarPJ(responsavel)) != null) {
+			respj = this.locadora.buscarPJ(responsavel);
+			vcarga = this.locadora.frota.retornaVC(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respj, vcarga);
+			return;
+		}if ((mt = this.locadora.frota.retornaMT(busca)) != null && (respj = this.locadora.buscarPJ(responsavel)) != null) {
+			respj = this.locadora.buscarPJ(responsavel);
+			mt = this.locadora.frota.retornaMT(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respj, mt);
+			return;
+		} if ((vp = this.locadora.frota.retornaVP(busca)) != null && (respj = this.locadora.buscarPJ(responsavel)) != null) {
+			respj = this.locadora.buscarPJ(responsavel);
+			vp = this.locadora.frota.retornaVP(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respj, vp);
+			return;
+		} if((van = this.locadora.frota.retornaVan(busca)) != null && (respj = this.locadora.buscarPJ(responsavel)) != null) {
+			respj = this.locadora.buscarPJ(responsavel);
+			van = this.locadora.frota.retornaVan(busca);	
+			this.locadora.cadastrarReserva(responsavel, qtdDias, respj, van);
+			return;
 		}
-		JOptionPane.showMessageDialog(null, "Responsavel/Veiculo nao encontrado");
+		JOptionPane.showMessageDialog(null, "Responsavel nao encontrado");
 	}
 	public void optAShow() {
     	String n = JOptionPane.showInputDialog(null, "****************** Menu Gerência de Locatários *************"
