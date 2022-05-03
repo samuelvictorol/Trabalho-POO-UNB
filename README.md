@@ -1,7 +1,7 @@
 # LOCADORA DE VEICULOS
 
 # Trabalho de Orientação a Objetos  UnB - FGA ~ Grupo 10
-
+-OBS: Diagramas estão na pasta Diagramas na branch principal (Main)
 # MEMBROS:
 - Samuel Victor Oliveira Lima - 190059001
 - Ana Luiza Hoffmann Ferreira - 202015901
