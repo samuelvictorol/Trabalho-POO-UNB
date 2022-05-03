@@ -15,6 +15,7 @@ public class PessoaJuridica extends Locatarios {
 		public void setIdade(int idade) {
 			this.idade = idade;
 		}
+		
 		public String getCnpj() {
 			return this.CNPJ;
 		}
